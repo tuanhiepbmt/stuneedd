@@ -1,0 +1,119 @@
+<% include partials/main %>
+
+    <head>
+        
+        <% include partials/title-meta %>
+        
+        <!-- Responsive Table css -->
+        <link href="/assets/libs/admin-resources/rwd-table/rwd-table.min.css" rel="stylesheet" type="text/css" />
+
+        <% include partials/head-css %>
+
+    </head>
+
+    <% include partials/body %>
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            <% include partials/menu %>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <% include partials/page-title %>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Tất cả sản phẩm</h4>
+                                        <div class="table-rep-plugin">
+                                            <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                                <table id="tech-companies-1" class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Mã sản phẩm</th>
+                                                        <th data-priority="1">Ảnh sản phẩm</th>
+                                                        <th data-priority="1">Tên sản phẩm</th>
+                                                        <th data-priority="3">Danh mục</th>
+                                                        <th data-priority="1">Loại</th>
+                                                        <th data-priority="3">Chất liệu</th>
+                                                        <th data-priority="3">Size</th>
+                                                        <th data-priority="1">Giá</th>
+                                                        <th data-priority="1">Số lượng kho</th>
+                                                        <th data-priority="3">Xuất xứ</th>
+                                                        <th data-priority="1">Lượt mua</th>
+                                                        <th data-priority="3">Ngày thêm</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <% products.forEach((product) => { %>
+                                                        <tr>
+                                                            <td><%= product.productGtin %></td>
+                                                            <% if(product.productImage[0].indexOf('client/images/')==-1){ %> 
+                                                            <td><img class="card-img img-fluid" src="<%= product.productImage[0] %>" alt="Card image"></td>
+                                                            <% }else{ %> 
+                                                            <td><img class="card-img img-fluid" src="/<%= product.productImage[0] %>" alt="Card image"></td>
+                                                            <% } %> 
+                                                            <td><%= product.productName %></td>
+                                                            <td><%= product.productCategory %></td>
+                                                            <td><%= product.productType %></td>
+                                                            <td><%= product.productMaterial %></td>
+                                                            <td><%= product.productSize %></td>
+                                                            <td><%= product.productPrice %></td>
+                                                            <td><%= product.productStock %></td>
+                                                            <td><%= product.productOrigin %></td>
+                                                            <td><%= product.productPurchases %></td>
+                                                            <td><%= product.productAddedDate %></td>
+                                                            <td>
+                                                                <input class="btn btn-primary" type="button" value="Sửa"
+                                                                    onclick="handleUpdateProduct('<%= product.productGtin %>')">
+                                                            </td>
+                                                        </tr>
+                                                        <% }) %>
+                                                </table>
+                                                <script>
+                                                function handleUpdateProduct(value) {
+                                                    $(location).attr('href', '/admin/update-product/' + value);
+                                                }
+                                                </script>
+                                            </div>
+        
+                                        </div>
+        
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+                
+                <% include partials/footer %>
+                
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+        <% include partials/right-sidebar %>
+
+        <% include partials/vendor-scripts %>
+
+         <!-- Responsive Table js -->
+         <script src="/assets/libs/admin-resources/rwd-table/rwd-table.min.js"></script>
+
+        <!-- Init js -->
+        <script src="/assets/js/pages/table-responsive.init.js"></script>
+
+        <script src="/assets/js/app.js"></script>
+
+    </body>
+</html>
